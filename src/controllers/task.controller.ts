@@ -1,16 +1,13 @@
 import type { Request, Response } from "express";
-import { getTasksByIdService, getTasksService } from "../services/task.service.js";
+import taskService from "../services/task.service.js";
 
-export function getTasks(req: Request, res: Response) {
-    const allTasks = getTasksService();
+async function getTasks(req: Request, res: Response) {
+    const tasks = await taskService.getTasksService();
     res.json({
-        allTasks
+        tasks: tasks
     });
 }
 
-export function getTasksById(req: Request, res: Response) {
-    const task = getTasksByIdService(Number(req.params.id));
-    res.json({
-        task: task
-    })
+export default {
+    getTasks
 }

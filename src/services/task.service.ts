@@ -1,24 +1,9 @@
-const tasks = [
-    {
-        id: 1,
-        title: "Estudar Node.js",
-        completed: false
-    },
-    {
-        id: 2,
-        title: "Estudar Docker",
-        completed: false
-    }
-];
+import taskRepository from "../repositories/task.repository.js";
 
-export function getTasksService() {
-    return tasks;
+async function getTasksService() {
+    return taskRepository.getTasksRepository();
 }
 
-export function getTasksByIdService(id: Number) {
-    const indice = tasks.findIndex(task => task.id === id);
-    if(indice !== 1) {
-        const taskEncontrada = tasks[indice];
-        return taskEncontrada;
-    }
+export default {
+    getTasksService
 }
