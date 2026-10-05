@@ -8,6 +8,15 @@ async function getTasks(req: Request, res: Response) {
     });
 }
 
+async function getTasksById(req: Request, res: Response) {
+    const id = Number(req.params.id);
+    const task = await taskService.getTasksByIdService(id);
+    res.json({
+        task: task
+    });
+}
+
 export default {
-    getTasks
+    getTasks,
+    getTasksById
 }
