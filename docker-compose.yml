@@ -1,0 +1,10 @@
+services:
+  postgres:
+    image: postgres:18
+    container_name: devtask-db
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: devtask
+      POSTGRES_USER: devtask
+      POSTGRES_PASSWORD: devtask
