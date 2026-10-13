@@ -8,9 +8,9 @@ async function getTasks(req: Request, res: Response) {
     });
 }
 
-async function getTasksById(req: Request, res: Response) {
+async function getTaskById(req: Request, res: Response) {
     const id = Number(req.params.id);
-    const task = await taskService.getTasksByIdService(id);
+    const task = await taskService.getTaskByIdService(id);
     res.json({
         task: task
     });
@@ -18,5 +18,5 @@ async function getTasksById(req: Request, res: Response) {
 
 export default {
     getTasks,
-    getTasksById
+    getTaskById
 }

@@ -6,12 +6,12 @@ async function getTasksRepository(): Promise<Task[]> {
     return result.rows;
 }
 
-async function getTasksByIdRepository(id: number): Promise<Task | undefined> {
+async function getTaskByIdRepository(id: number): Promise<Task | undefined> {
     const result = await pool.query('SELECT * FROM tasks WHERE id = $1', [id]);
     return result.rows[0];
 }
 
 export default {
     getTasksRepository,
-    getTasksByIdRepository
+    getTaskByIdRepository
 };
