@@ -1,10 +1,35 @@
 services:
+  api:
+    build: .
+    container_name: devtask-api
+    ports:
+      - "3000:3000"
+    environment:
+      PORT: ${PORT:-3000}
+      DB_HOST: postgres
+      DB_PORT: ${DB_PORT:-5432}
+      DB_NAME: ${DB_NAME:-devtask}
+      DB_USER: ${DB_USER:-devtask}
+      DB_PASSWORD: ${DB_PASSWORD:?Defina DB_PASSWORD no .env}
+    depends_on:
+      postgres:
+        condition: service_healthy
   postgres:
     image: postgres:18
     container_name: devtask-db
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_DB: devtask
-      POSTGRES_USER: devtask
-      POSTGRES_PASSWORD: devtask
+      POSTGRES_DB: ${POSTGRES_DB:-devtask}
+      POSTGRES_USER: ${POSTGRES_USER:-devtask}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD?Defina DB_PASSWORD no .env}
+    volumes:
+      - postgres_data:/var/lib/postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U devtask -d devtask"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+volumes:
+  postgres_data:
