@@ -1,3 +1,2 @@
-const message = "Hello Word";
-console.log(message);
-export {};
+import { startServer } from "./server.js";
+startServer();
